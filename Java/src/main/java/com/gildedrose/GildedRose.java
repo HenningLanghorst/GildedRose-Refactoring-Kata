@@ -46,11 +46,14 @@ class GildedRose {
     }
 
 
-    private static void processOther(Item item) {
-        decreaseQuality(item);
-        decreaseSellIn(item);
-        if (item.sellIn < 0) {
-            decreaseQuality(item);
+    static void processOther(Item item) {
+        if (item.sellIn > 0) {
+            decreaseQuality(1, item);
+            decreaseSellIn(item);
+        } else {
+            decreaseQuality(2, item);
+            decreaseSellIn(item);
+
         }
     }
 
@@ -64,9 +67,9 @@ class GildedRose {
         }
     }
 
-    private static void decreaseQuality(Item item) {
+    private static void decreaseQuality(int count, Item item) {
         if (item.quality > 0) {
-            item.quality = item.quality - 1;
+            item.quality = item.quality - count;
         }
     }
 }
