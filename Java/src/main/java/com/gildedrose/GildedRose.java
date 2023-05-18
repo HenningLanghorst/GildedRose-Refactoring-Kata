@@ -24,21 +24,25 @@ class GildedRose {
     }
 
     private static void processAgedBree(Item item) {
-        increaseQuality(item);
+        if (item.sellIn > 0) {
+            increaseQuality(1, item);
+            decreaseSellIn(item);
 
-        decreaseSellIn(item);
-
-        if (item.sellIn < 0) {
-            increaseQuality(item);
+        } else {
+            increaseQuality(2, item);
+            decreaseSellIn(item);
         }
+
     }
 
     private static void processBackstagePass(Item item) {
-        increaseQuality(item);
-        if (item.sellIn < 11)
-            increaseQuality(item);
-        if (item.sellIn < 6)
-            increaseQuality(item);
+        increaseQuality(1, item);
+        if (item.sellIn < 11) {
+            increaseQuality(1, item);
+        }
+        if (item.sellIn < 6) {
+            increaseQuality(1, item);
+        }
         decreaseSellIn(item);
         if (item.sellIn < 0) {
             item.quality = 0;
@@ -61,9 +65,9 @@ class GildedRose {
         item.sellIn = item.sellIn - 1;
     }
 
-    private static void increaseQuality(Item item) {
+    private static void increaseQuality(int count, Item item) {
         if (item.quality < 50) {
-            item.quality = item.quality + 1;
+            item.quality = item.quality + count;
         }
     }
 
