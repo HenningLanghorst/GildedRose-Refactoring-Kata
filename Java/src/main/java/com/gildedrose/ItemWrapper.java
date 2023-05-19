@@ -12,6 +12,7 @@ public abstract class ItemWrapper {
     public static ItemWrapper from(Item item) {
         return switch (item.name) {
             case "Aged Brie" -> new AgedBrie(item);
+            case "Conjured" -> new ConjuredItem(item);
             case "Backstage passes to a TAFKAL80ETC concert" -> new BackstagePass(item);
             case "Sulfuras, Hand of Ragnaros" -> new Sulfuras(item);
             default -> new OtherItem(item);

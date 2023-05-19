@@ -23,7 +23,7 @@ class GildedRoseTest {
     }
 
     @Test
-    @DisplayName("At the end of each day our system lowers both values for every item")
+    @DisplayName("After sell date, items degrade twice as fast")
     void quality_decrease_after_sell_date() {
         Item[] items = new Item[]{new Item("foo", 0, 20)};
         GildedRose app = new GildedRose(items);
@@ -31,6 +31,29 @@ class GildedRoseTest {
         assertThat(items)
             .usingRecursiveFieldByFieldElementComparator()
             .containsExactly(new Item("foo", -1, 18));
+    }
+
+
+    @Test
+    @DisplayName("'Cunjured' items degrade by 2")
+    void conjured_quality_decrease() {
+        Item[] items = new Item[]{new Item("Conjured", 10, 20)};
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertThat(items)
+            .usingRecursiveFieldByFieldElementComparator()
+            .containsExactly(new Item("Conjured", 9, 18));
+    }
+
+    @Test
+    @DisplayName("After sell date, 'Cunjured' items degrade by 4")
+    void conjured_quality_decrease_after_sell_date() {
+        Item[] items = new Item[]{new Item("Conjured", 0, 20)};
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertThat(items)
+            .usingRecursiveFieldByFieldElementComparator()
+            .containsExactly(new Item("Conjured", -1, 16));
     }
 
     @CsvSource({
