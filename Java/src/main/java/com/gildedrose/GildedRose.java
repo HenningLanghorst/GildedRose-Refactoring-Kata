@@ -22,15 +22,11 @@ class GildedRose {
 
                     if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                         if (item.sellIn < 11) {
-                            if (item.quality < 50) {
-                                item.quality = item.quality + 1;
-                            }
+                            decreaseQuality(item);
                         }
 
                         if (item.sellIn < 6) {
-                            if (item.quality < 50) {
-                                item.quality = item.quality + 1;
-                            }
+                            decreaseQuality(item);
                         }
                     }
                 }
@@ -49,9 +45,7 @@ class GildedRose {
     private static void handleExpired(Item item) {
         switch (item.name) {
             case "Aged Brie":
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
-                }
+                decreaseQuality(item);
                 break;
             case "Backstage passes to a TAFKAL80ETC concert":
                 item.quality = 0;
@@ -61,6 +55,12 @@ class GildedRose {
             default:
                 increaseQuality(item);
                 break;
+        }
+    }
+
+    private static void decreaseQuality(Item item) {
+        if (item.quality < 50) {
+            item.quality = item.quality + 1;
         }
     }
 
