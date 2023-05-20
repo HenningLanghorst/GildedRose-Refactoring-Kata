@@ -9,34 +9,27 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            switch (item.name) {
-                case "Aged Brie" -> {
-                    adjustQuality(item, ageBrieQualityChange(item));
-                }
-                case "Backstage passes to a TAFKAL80ETC concert" -> {
-                    adjustQuality(item, backstagePassQualityChange(item));
-                }
-                case "Sulfuras, Hand of Ragnaros" -> {
-                    adjustQuality(item, sulfurasQualityChange());
-                }
-                default -> {
-                    adjustQuality(item, otherQualityChange(item));
-                }
-            }
+            int adjustment = switch (item.name) {
+                case "Aged Brie" -> ageBrieQualityChange(item);
+                case "Backstage passes to a TAFKAL80ETC concert" -> backstagePassQualityChange(item);
+                case "Sulfuras, Hand of Ragnaros" -> 0;
+                default -> otherQualityChange(item);
+            };
+            adjustQuality(item, adjustment);
 
-            if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                item.sellIn = item.sellIn - 1;
-            }
+            decreaseSellInDate(item);
 
+        }
+    }
+
+    private static void decreaseSellInDate(Item item) {
+        if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
+            item.sellIn = item.sellIn - 1;
         }
     }
 
     private static int otherQualityChange(Item item) {
         return isExpired(item) ? -2 : -1;
-    }
-
-    private static int sulfurasQualityChange() {
-        return 0;
     }
 
     private static int ageBrieQualityChange(Item item) {
