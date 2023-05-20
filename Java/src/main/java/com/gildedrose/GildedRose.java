@@ -15,11 +15,11 @@ class GildedRose {
 
                     if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                         if (item.sellIn < 11) {
-                            decreaseQuality(item);
+                            inreaseQuality(item);
                         }
 
                         if (item.sellIn < 6) {
-                            decreaseQuality(item);
+                            inreaseQuality(item);
                         }
                     }
                 }
@@ -29,11 +29,11 @@ class GildedRose {
 
                     if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                         if (item.sellIn < 11) {
-                            decreaseQuality(item);
+                            inreaseQuality(item);
                         }
 
                         if (item.sellIn < 6) {
-                            decreaseQuality(item);
+                            inreaseQuality(item);
                         }
                     }
                 }
@@ -54,11 +54,12 @@ class GildedRose {
         }
     }
 
+
     private static void handleExpired(Item item) {
         String name = item.name;
         switch (name) {
             case "Aged Brie":
-                decreaseQuality(item);
+                inreaseQuality(item);
                 break;
             case "Backstage passes to a TAFKAL80ETC concert":
                 item.quality = 0;
@@ -66,18 +67,18 @@ class GildedRose {
             case "Sulfuras, Hand of Ragnaros":
                 break;
             default:
-                increaseQuality(item);
+                decreaseQuality(item);
                 break;
         }
     }
 
-    private static void decreaseQuality(Item item) {
+    private static void inreaseQuality(Item item) {
         if (item.quality < 50) {
             item.quality = item.quality + 1;
         }
     }
 
-    private static void increaseQuality(Item item) {
+    private static void decreaseQuality(Item item) {
         if (item.quality > 0) {
             item.quality = item.quality - 1;
         }
