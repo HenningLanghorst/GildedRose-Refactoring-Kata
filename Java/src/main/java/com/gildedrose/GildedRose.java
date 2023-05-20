@@ -10,10 +10,10 @@ class GildedRose {
     public void updateQuality() {
         for (Item item : items) {
             switch (item.name) {
-                case "Aged Brie" -> increaseQuality(item);
+                case "Aged Brie" -> increaseQuality(item, 1);
                 case "Backstage passes to a TAFKAL80ETC concert" -> handleBackstagePass(item);
                 case "Sulfuras, Hand of Ragnaros" -> doNothing();
-                default -> decreaseQuality(item);
+                default -> decreaseQuality(item, 1);
             }
 
             if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
@@ -21,32 +21,28 @@ class GildedRose {
             }
 
             if (item.sellIn < 0) {
-                handleExpired(item);
+                switch (item.name) {
+                    case "Aged Brie" -> increaseQuality(item, 1);
+                    case "Backstage passes to a TAFKAL80ETC concert" -> setZeroQuality(item);
+                    case "Sulfuras, Hand of Ragnaros" -> doNothing();
+                    default -> decreaseQuality(item, 1);
+                }
             }
         }
     }
 
     private static void handleBackstagePass(Item item) {
-        increaseQuality(item);
+        increaseQuality(item, 1);
 
         if (item.sellIn < 11) {
-            increaseQuality(item);
+            increaseQuality(item, 1);
         }
 
         if (item.sellIn < 6) {
-            increaseQuality(item);
+            increaseQuality(item, 1);
         }
     }
 
-
-    private static void handleExpired(Item item) {
-        switch (item.name) {
-            case "Aged Brie" -> increaseQuality(item);
-            case "Backstage passes to a TAFKAL80ETC concert" -> setZeroQuality(item);
-            case "Sulfuras, Hand of Ragnaros" -> doNothing();
-            default -> decreaseQuality(item);
-        }
-    }
 
     private static void doNothing() {
         // placeholder for doing nothing
@@ -56,15 +52,11 @@ class GildedRose {
         item.quality = 0;
     }
 
-    private static void increaseQuality(Item item) {
-        if (item.quality < 50) {
-            item.quality = item.quality + 1;
-        }
+    private static void increaseQuality(Item item, int count) {
+        item.quality = Math.min(50, item.quality + count);
     }
 
-    private static void decreaseQuality(Item item) {
-        if (item.quality > 0) {
-            item.quality = item.quality - 1;
-        }
+    private static void decreaseQuality(Item item, int count) {
+        item.quality = Math.max(0, item.quality - count);
     }
 }
