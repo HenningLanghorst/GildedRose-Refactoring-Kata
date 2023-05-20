@@ -32,15 +32,16 @@ class GildedRose {
     }
 
     private static void handleBackstagePass(Item item) {
-        increaseQuality(item, 1);
+
+        if (item.sellIn < 6) {
+            increaseQuality(item, 1);
+        }
 
         if (item.sellIn < 11) {
             increaseQuality(item, 1);
         }
 
-        if (item.sellIn < 6) {
-            increaseQuality(item, 1);
-        }
+        increaseQuality(item, 1);
     }
 
 
