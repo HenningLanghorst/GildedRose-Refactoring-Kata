@@ -54,7 +54,7 @@ class GildedRose {
     }
 
     private static void doNothing() {
-        // place holder for doing nothing
+        // placeholder for doing nothing
     }
 
     private static void setZeroQuality(Item item) {
