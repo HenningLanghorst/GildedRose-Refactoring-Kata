@@ -59,10 +59,14 @@ class GildedRose {
             case "Sulfuras, Hand of Ragnaros":
                 break;
             default:
-                if (item.quality > 0) {
-                    item.quality = item.quality - 1;
-                }
+                increaseQuality(item);
                 break;
+        }
+    }
+
+    private static void increaseQuality(Item item) {
+        if (item.quality > 0) {
+            item.quality = item.quality - 1;
         }
     }
 }
