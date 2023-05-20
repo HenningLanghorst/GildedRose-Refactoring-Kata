@@ -19,7 +19,6 @@ class GildedRose {
                 }
                 case "Sulfuras, Hand of Ragnaros" -> {
                     adjustQuality(item, 0);
-                    if (isExpired(item)) adjustQuality(item, 0);
                 }
                 default -> {
                     adjustQuality(item, -1);
