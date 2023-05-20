@@ -10,10 +10,11 @@ class GildedRose {
     public void updateQuality() {
         for (Item item : items) {
             switch (item.name) {
-                case "Aged Brie" -> increaseQuality(item, 1);
-                case "Backstage passes to a TAFKAL80ETC concert" -> handleBackstagePass(item);
+                case "Aged Brie" -> adjustQuality(item, 1);
+                case "Backstage passes to a TAFKAL80ETC concert" ->
+                    adjustQuality(item, backstagePassQualityIncrease(item));
                 case "Sulfuras, Hand of Ragnaros" -> doNothing();
-                default -> decreaseQuality(item, 1);
+                default -> adjustQuality(item, -1);
             }
 
             if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
@@ -22,17 +23,13 @@ class GildedRose {
 
             if (item.sellIn < 0) {
                 switch (item.name) {
-                    case "Aged Brie" -> increaseQuality(item, 1);
+                    case "Aged Brie" -> adjustQuality(item, 1);
                     case "Backstage passes to a TAFKAL80ETC concert" -> setZeroQuality(item);
                     case "Sulfuras, Hand of Ragnaros" -> doNothing();
-                    default -> decreaseQuality(item, 1);
+                    default -> adjustQuality(item, -1);
                 }
             }
         }
-    }
-
-    private static void handleBackstagePass(Item item) {
-        increaseQuality(item, backstagePassQualityIncrease(item));
     }
 
     private static int backstagePassQualityIncrease(Item item) {
@@ -56,11 +53,8 @@ class GildedRose {
         item.quality = 0;
     }
 
-    private static void increaseQuality(Item item, int count) {
-        item.quality = Math.min(50, item.quality + count);
+    private static void adjustQuality(Item item, int count) {
+        item.quality = Math.max(0, Math.min(50, item.quality + count));
     }
 
-    private static void decreaseQuality(Item item, int count) {
-        item.quality = Math.max(0, item.quality - count);
-    }
 }
