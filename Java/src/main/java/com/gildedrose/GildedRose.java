@@ -22,8 +22,11 @@ class GildedRose {
     private static int calculateQualityChange(Item item) {
         return switch (item.name) {
             case "Aged Brie" -> {
-                if (isExpired(item)) yield 2;
-                yield 1;
+                if (isExpired(item)) {
+                    yield 2;
+                } else {
+                    yield 1;
+                }
             }
             case "Backstage passes to a TAFKAL80ETC concert" -> {
                 if (isExpired(item)) {
@@ -38,8 +41,11 @@ class GildedRose {
             }
             case "Sulfuras, Hand of Ragnaros" -> 0;
             default -> {
-                if (isExpired(item)) yield -2;
-                yield -1;
+                if (isExpired(item)) {
+                    yield -2;
+                } else {
+                    yield -1;
+                }
             }
         };
     }
