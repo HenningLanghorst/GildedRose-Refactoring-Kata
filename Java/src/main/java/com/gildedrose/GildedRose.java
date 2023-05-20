@@ -24,7 +24,7 @@ class GildedRose {
             if (item.sellIn < 0) {
                 switch (item.name) {
                     case "Aged Brie" -> adjustQuality(item, 1);
-                    case "Backstage passes to a TAFKAL80ETC concert" -> setZeroQuality(item);
+                    case "Backstage passes to a TAFKAL80ETC concert" -> adjustQuality(item, -item.quality);
                     case "Sulfuras, Hand of Ragnaros" -> adjustQuality(item, 0);
                     default -> adjustQuality(item, -1);
                 }
@@ -40,11 +40,6 @@ class GildedRose {
         } else {
             return 1;
         }
-    }
-
-
-    private static void setZeroQuality(Item item) {
-        item.quality = 0;
     }
 
     private static void adjustQuality(Item item, int count) {
