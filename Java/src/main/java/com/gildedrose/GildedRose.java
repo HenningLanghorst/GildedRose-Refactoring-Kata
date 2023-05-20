@@ -59,8 +59,8 @@ class GildedRose {
         }
     }
 
-    private static void adjustQuality(Item item, int count) {
-        item.quality = Math.max(0, Math.min(50, item.quality + count));
+    private static void adjustQuality(Item item, int adjustment) {
+        item.quality = Math.max(0, Math.min(50, item.quality + adjustment));
     }
 
 }
