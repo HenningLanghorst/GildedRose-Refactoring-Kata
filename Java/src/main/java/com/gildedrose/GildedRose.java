@@ -21,8 +21,7 @@ class GildedRose {
                     adjustQuality(item, 0);
                 }
                 default -> {
-                    adjustQuality(item, -1);
-                    if (isExpired(item)) adjustQuality(item, -1);
+                    adjustQuality(item, isExpired(item) ? -2 : -1);
                 }
             }
 
