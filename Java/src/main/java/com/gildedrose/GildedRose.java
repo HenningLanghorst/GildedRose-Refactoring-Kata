@@ -21,33 +21,39 @@ class GildedRose {
 
     private static int calculateQualityChange(Item item) {
         return switch (item.name) {
-            case "Aged Brie" -> {
-                if (isExpired(item)) {
-                    yield 2;
-                } else {
-                    yield 1;
-                }
-            }
-            case "Backstage passes to a TAFKAL80ETC concert" -> {
-                if (isExpired(item)) {
-                    yield -item.quality;
-                } else if (item.sellIn < 6) {
-                    yield 3;
-                } else if (item.sellIn < 11) {
-                    yield 2;
-                } else {
-                    yield 1;
-                }
-            }
+            case "Aged Brie" -> calculateAgedBrieQualityAdjustment(item);
+            case "Backstage passes to a TAFKAL80ETC concert" -> calculateBackstagePassesQualityAdjustment(item);
             case "Sulfuras, Hand of Ragnaros" -> 0;
-            default -> {
-                if (isExpired(item)) {
-                    yield -2;
-                } else {
-                    yield -1;
-                }
-            }
+            default -> calculateOthersQualityAdjustment(item);
         };
+    }
+
+    private static int calculateAgedBrieQualityAdjustment(Item item) {
+        if (isExpired(item)) {
+            return 2;
+        } else {
+            return 1;
+        }
+    }
+
+    private static int calculateBackstagePassesQualityAdjustment(Item item) {
+        if (isExpired(item)) {
+            return -item.quality;
+        } else if (item.sellIn < 6) {
+            return 3;
+        } else if (item.sellIn < 11) {
+            return 2;
+        } else {
+            return 1;
+        }
+    }
+
+    private static int calculateOthersQualityAdjustment(Item item) {
+        if (isExpired(item)) {
+            return -2;
+        } else {
+            return -1;
+        }
     }
 
     private static boolean isExpired(Item item) {
