@@ -51,7 +51,7 @@ class GildedRose {
                 inreaseQuality(item);
                 break;
             case "Backstage passes to a TAFKAL80ETC concert":
-                item.quality = 0;
+                setZeroQuality(item);
                 break;
             case "Sulfuras, Hand of Ragnaros":
                 break;
@@ -59,6 +59,10 @@ class GildedRose {
                 decreaseQuality(item);
                 break;
         }
+    }
+
+    private static void setZeroQuality(Item item) {
+        item.quality = 0;
     }
 
     private static void inreaseQuality(Item item) {
