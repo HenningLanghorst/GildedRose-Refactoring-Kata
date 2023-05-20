@@ -10,21 +10,34 @@ class GildedRose {
     public void updateQuality() {
         for (Item item : items) {
             switch (item.name) {
-                case "Aged Brie" -> adjustQuality(item, 1);
-                case "Backstage passes to a TAFKAL80ETC concert" ->
+                case "Aged Brie" -> {
+                    adjustQuality(item, 1);
+                }
+                case "Backstage passes to a TAFKAL80ETC concert" -> {
                     adjustQuality(item, backstagePassQualityIncrease(item));
-                case "Sulfuras, Hand of Ragnaros" -> adjustQuality(item, 0);
-                default -> adjustQuality(item, -1);
-            }
-
-            if (item.sellIn < 1) {
-                switch (item.name) {
-                    case "Aged Brie" -> adjustQuality(item, 1);
-                    case "Backstage passes to a TAFKAL80ETC concert" -> adjustQuality(item, -item.quality);
-                    case "Sulfuras, Hand of Ragnaros" -> adjustQuality(item, 0);
-                    default -> adjustQuality(item, -1);
+                }
+                case "Sulfuras, Hand of Ragnaros" -> {
+                    adjustQuality(item, 0);
+                }
+                default -> {
+                    adjustQuality(item, -1);
                 }
             }
+
+                switch (item.name) {
+                    case "Aged Brie" -> {
+                        if (item.sellIn < 1) adjustQuality(item, 1);
+                    }
+                    case "Backstage passes to a TAFKAL80ETC concert" -> {
+                        if (item.sellIn < 1) adjustQuality(item, -item.quality);
+                    }
+                    case "Sulfuras, Hand of Ragnaros" -> {
+                        if (item.sellIn < 1) adjustQuality(item, 0);
+                    }
+                    default -> {
+                        if (item.sellIn < 1) adjustQuality(item, -1);
+                    }
+                }
 
             if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
                 item.sellIn = item.sellIn - 1;
