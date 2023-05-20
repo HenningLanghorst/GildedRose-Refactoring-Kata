@@ -45,20 +45,16 @@ class GildedRose {
 
 
     private static void handleExpired(Item item) {
-        String name = item.name;
-        switch (name) {
-            case "Aged Brie":
-                inreaseQuality(item);
-                break;
-            case "Backstage passes to a TAFKAL80ETC concert":
-                setZeroQuality(item);
-                break;
-            case "Sulfuras, Hand of Ragnaros":
-                break;
-            default:
-                decreaseQuality(item);
-                break;
+        switch (item.name) {
+            case "Aged Brie" -> inreaseQuality(item);
+            case "Backstage passes to a TAFKAL80ETC concert" -> setZeroQuality(item);
+            case "Sulfuras, Hand of Ragnaros" -> doNothing();
+            default -> decreaseQuality(item);
         }
+    }
+
+    private static void doNothing() {
+        // place holder for doing nothing
     }
 
     private static void setZeroQuality(Item item) {
