@@ -33,15 +33,13 @@ class GildedRose {
     }
 
     private static int backstagePassQualityIncrease(Item item) {
-        int count;
         if (item.sellIn < 6) {
-            count = 3;
+            return 3;
         } else if (item.sellIn < 11) {
-            count = 2;
+            return 2;
         } else {
-            count = 1;
+            return 1;
         }
-        return count;
     }
 
 
