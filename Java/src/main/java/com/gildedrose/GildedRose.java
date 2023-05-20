@@ -15,7 +15,6 @@ class GildedRose {
                 }
                 case "Backstage passes to a TAFKAL80ETC concert" -> {
                     adjustQuality(item, backstagePassQualityIncrease(item));
-                    if (isExpired(item)) adjustQuality(item, -item.quality);
                 }
                 case "Sulfuras, Hand of Ragnaros" -> {
                     adjustQuality(item, 0);
@@ -37,7 +36,9 @@ class GildedRose {
     }
 
     private static int backstagePassQualityIncrease(Item item) {
-        if (item.sellIn < 6) {
+        if (isExpired(item)) {
+            return -item.quality;
+        } else if (item.sellIn < 6) {
             return 3;
         } else if (item.sellIn < 11) {
             return 2;
