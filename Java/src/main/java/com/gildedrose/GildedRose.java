@@ -10,20 +10,17 @@ class GildedRose {
     public void updateQuality() {
         for (Item item : items) {
             if (item.name.equals("Aged Brie")) {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
-
-                }
+                increaseQuality(item);
             } else if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 if (item.quality < 50) {
                     item.quality = item.quality + 1;
 
                     if (item.sellIn < 11) {
-                        inreaseQuality(item);
+                        increaseQuality(item);
                     }
 
                     if (item.sellIn < 6) {
-                        inreaseQuality(item);
+                        increaseQuality(item);
                     }
                 }
             } else if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
@@ -46,7 +43,7 @@ class GildedRose {
 
     private static void handleExpired(Item item) {
         switch (item.name) {
-            case "Aged Brie" -> inreaseQuality(item);
+            case "Aged Brie" -> increaseQuality(item);
             case "Backstage passes to a TAFKAL80ETC concert" -> setZeroQuality(item);
             case "Sulfuras, Hand of Ragnaros" -> doNothing();
             default -> decreaseQuality(item);
@@ -61,7 +58,7 @@ class GildedRose {
         item.quality = 0;
     }
 
-    private static void inreaseQuality(Item item) {
+    private static void increaseQuality(Item item) {
         if (item.quality < 50) {
             item.quality = item.quality + 1;
         }
