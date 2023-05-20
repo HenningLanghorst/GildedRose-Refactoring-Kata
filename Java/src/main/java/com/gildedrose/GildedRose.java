@@ -13,7 +13,7 @@ class GildedRose {
                 case "Aged Brie" -> adjustQuality(item, 1);
                 case "Backstage passes to a TAFKAL80ETC concert" ->
                     adjustQuality(item, backstagePassQualityIncrease(item));
-                case "Sulfuras, Hand of Ragnaros" -> doNothing();
+                case "Sulfuras, Hand of Ragnaros" -> adjustQuality(item, 0);
                 default -> adjustQuality(item, -1);
             }
 
@@ -25,7 +25,7 @@ class GildedRose {
                 switch (item.name) {
                     case "Aged Brie" -> adjustQuality(item, 1);
                     case "Backstage passes to a TAFKAL80ETC concert" -> setZeroQuality(item);
-                    case "Sulfuras, Hand of Ragnaros" -> doNothing();
+                    case "Sulfuras, Hand of Ragnaros" -> adjustQuality(item, 0);
                     default -> adjustQuality(item, -1);
                 }
             }
@@ -44,10 +44,6 @@ class GildedRose {
         return count;
     }
 
-
-    private static void doNothing() {
-        // placeholder for doing nothing
-    }
 
     private static void setZeroQuality(Item item) {
         item.quality = 0;
