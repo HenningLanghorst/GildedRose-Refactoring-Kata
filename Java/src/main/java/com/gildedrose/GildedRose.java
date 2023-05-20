@@ -32,6 +32,10 @@ class GildedRose {
     }
 
     private static void handleBackstagePass(Item item) {
+        increaseQuality(item, backstagePassQualityIncrease(item));
+    }
+
+    private static int backstagePassQualityIncrease(Item item) {
         int count;
         if (item.sellIn < 6) {
             count = 3;
@@ -40,7 +44,7 @@ class GildedRose {
         } else {
             count = 1;
         }
-        increaseQuality(item, count);
+        return count;
     }
 
 
