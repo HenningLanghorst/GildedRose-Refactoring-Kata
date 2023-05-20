@@ -11,16 +11,16 @@ class GildedRose {
         for (Item item : items) {
             switch (item.name) {
                 case "Aged Brie" -> {
-                    adjustQuality(item, isExpired(item) ? 2 : 1);
+                    adjustQuality(item, ageBrieQualityChange(item));
                 }
                 case "Backstage passes to a TAFKAL80ETC concert" -> {
-                    adjustQuality(item, backstagePassQualityIncrease(item));
+                    adjustQuality(item, backstagePassQualityChange(item));
                 }
                 case "Sulfuras, Hand of Ragnaros" -> {
-                    adjustQuality(item, 0);
+                    adjustQuality(item, sulfurasQualityChange());
                 }
                 default -> {
-                    adjustQuality(item, isExpired(item) ? -2 : -1);
+                    adjustQuality(item, otherQualityChange(item));
                 }
             }
 
@@ -31,11 +31,23 @@ class GildedRose {
         }
     }
 
+    private static int otherQualityChange(Item item) {
+        return isExpired(item) ? -2 : -1;
+    }
+
+    private static int sulfurasQualityChange() {
+        return 0;
+    }
+
+    private static int ageBrieQualityChange(Item item) {
+        return isExpired(item) ? 2 : 1;
+    }
+
     private static boolean isExpired(Item item) {
         return item.sellIn < 1;
     }
 
-    private static int backstagePassQualityIncrease(Item item) {
+    private static int backstagePassQualityChange(Item item) {
         if (isExpired(item)) {
             return -item.quality;
         } else if (item.sellIn < 6) {
