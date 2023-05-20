@@ -11,8 +11,7 @@ class GildedRose {
         for (Item item : items) {
             switch (item.name) {
                 case "Aged Brie" -> {
-                    adjustQuality(item, 1);
-                    if (isExpired(item)) adjustQuality(item, 1);
+                    adjustQuality(item, isExpired(item) ? 2 : 1);
                 }
                 case "Backstage passes to a TAFKAL80ETC concert" -> {
                     adjustQuality(item, backstagePassQualityIncrease(item));
