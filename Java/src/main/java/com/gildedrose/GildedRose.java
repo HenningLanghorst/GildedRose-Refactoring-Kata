@@ -17,11 +17,7 @@ class GildedRose {
                 default -> adjustQuality(item, -1);
             }
 
-            if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                item.sellIn = item.sellIn - 1;
-            }
-
-            if (item.sellIn < 0) {
+            if (item.sellIn < 1) {
                 switch (item.name) {
                     case "Aged Brie" -> adjustQuality(item, 1);
                     case "Backstage passes to a TAFKAL80ETC concert" -> adjustQuality(item, -item.quality);
@@ -29,6 +25,11 @@ class GildedRose {
                     default -> adjustQuality(item, -1);
                 }
             }
+
+            if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
+                item.sellIn = item.sellIn - 1;
+            }
+
         }
     }
 
